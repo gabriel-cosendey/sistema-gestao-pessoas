@@ -1,0 +1,107 @@
+:root {
+  color-scheme: light dark;
+  --bg: #f3f6fb;
+  --surface: #ffffff;
+  --surface-strong: #f8fafc;
+  --surface-soft: #eef2f8;
+  --text: #1f2937;
+  --text-muted: #475569;
+  --border: #d2d6dc;
+  --border-soft: rgba(209, 213, 219, 0.6);
+  --primary: #2563eb;
+  --primary-strong: #1d4ed8;
+  --danger: #ef4444;
+  --success: #16a34a;
+  --accent: #8b5cf6;
+  --shadow: 0 24px 80px rgba(15, 23, 42, 0.08);
+  --shadow-soft: 0 10px 30px rgba(15, 23, 42, 0.06);
+  --bg-gradient: radial-gradient(circle at top left, rgba(37, 99, 235, 0.16), transparent 25%), radial-gradient(circle at bottom right, rgba(139, 92, 246, 0.12), transparent 20%);
+  --radius: 20px;
+  --font: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+body.theme-dark {
+  --bg: #090b14;
+  --surface: #111827;
+  --surface-strong: #1f2937;
+  --surface-soft: #161b2a;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --border: #334155;
+  --border-soft: rgba(100, 116, 139, 0.45);
+  --primary: #818cf8;
+  --primary-strong: #6366f1;
+  --danger: #f87171;
+  --success: #4ade80;
+  --accent: #a78bfa;
+  --shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+  --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.25);
+  --bg-gradient: radial-gradient(circle at top left, rgba(129, 140, 248, 0.14), transparent 25%), radial-gradient(circle at bottom right, rgba(248, 113, 113, 0.08), transparent 20%);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  transition: filter 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
+  border-radius: 14px;
+  border: none;
+  background: var(--primary);
+  color: white;
+  padding: 12px 18px;
+  box-shadow: var(--shadow-soft);
+}
+
+button:hover {
+  filter: brightness(0.93);
+  transform: translateY(-1px);
+}
+
+button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+input,
+select,
+textarea {
+  outline: none;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 12px 14px;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+}
+
+::selection {
+  background: rgba(37, 99, 235, 0.15);
+}

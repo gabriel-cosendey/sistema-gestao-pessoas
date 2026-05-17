@@ -1,0 +1,480 @@
+/* Layout */
+.pessoas-page {
+  min-height: 100vh;
+  background: var(--bg);
+}
+
+.pessoas-header {
+  background: var(--surface);
+  color: var(--text);
+  padding: 24px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 18px 52px rgba(15, 23, 42, 0.08);
+  border-radius: 24px;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+.pessoas-header h1 {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+}
+
+.pessoas-header p {
+  margin: 10px 0 0 0;
+  font-size: 14px;
+  opacity: 0.8;
+  max-width: 420px;
+  color: var(--text-muted);
+}
+
+.header-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.header-badge {
+  background: var(--surface-strong);
+  padding: 8px 18px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+  border: 1px solid var(--border-soft);
+}
+
+.pessoas-body {
+  max-width: 1180px;
+  margin: -12px auto 0 auto;
+  padding: 0 16px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.pessoas-card {
+  background: var(--surface);
+  border-radius: 28px;
+  box-shadow: 0 24px 70px rgba(15, 23, 42, 0.08);
+  border: 1px solid var(--border-soft);
+  overflow: hidden;
+}
+
+.pessoas-card .card-section {
+  padding: 32px 36px;
+}
+
+.pessoas-card .card-divider {
+  height: 1px;
+  background: var(--border-soft);
+  margin: 0 36px;
+}
+
+.pessoas-card h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.pessoas-card--list .tabela-header,
+.pessoas-card--list .lista-vazia,
+.pessoas-card--list .tabela-wrapper {
+  padding: 0;
+}
+
+.pessoas-card--list .tabela-header {
+  margin-bottom: 0;
+}
+
+.pessoas-card--list .tabela th,
+.pessoas-card--list .tabela td {
+  border-color: var(--border-soft);
+}
+
+.busca-grid--panel {
+  align-items: center;
+}
+
+.busca-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.pessoas-card {
+  background: var(--surface);
+  border-radius: 24px;
+  box-shadow: 0 20px 60px rgba(15, 23, 42, 0.08);
+  border: 1px solid var(--border-soft);
+  overflow: hidden;
+}
+
+.pessoas-card--panel {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.card-section {
+  padding: 30px 34px;
+}
+
+.card-divider {
+  height: 1px;
+  background: var(--border-soft);
+}
+
+.pessoas-card--panel h2 {
+  margin-top: 0;
+  margin-bottom: 22px;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.busca-grid--panel {
+  align-items: center;
+}
+
+.busca-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.btn-limpar {
+  padding: 10px 22px;
+  background: var(--surface-strong);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.btn-limpar:hover {
+  background: var(--surface);
+}
+
+.pessoas-card--list {
+  padding: 0;
+}
+
+.pessoas-card--list .tabela-header,
+.pessoas-card--list .lista-vazia,
+.pessoas-card--list .tabela-wrapper {
+  padding: 30px 34px;
+}
+
+.pessoas-card--list .tabela-header {
+  margin-bottom: 16px;
+}
+
+.pessoas-card--list .tabela {
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+.pessoas-card--list .tabela tr:hover td {
+  background: var(--surface-soft);
+}
+
+.pessoas-card--list .tabela th {
+  background: var(--surface-strong);
+}
+
+.pessoas-card--list .tabela td {
+  background: var(--surface);
+}
+
+/* Formulário */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.form-grid .full-width {
+  grid-column: 1 / -1;
+}
+
+.form label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.form label span.obrigatorio {
+  color: #dc2626;
+}
+
+.form input {
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 14px;
+  transition: border 0.2s, background-color 0.2s;
+  background: var(--surface);
+  color: var(--text);
+}
+
+.form input:focus {
+  outline: none;
+  border-color: var(--primary);
+  background: var(--surface);
+}
+
+.form-acoes {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.btn-primary {
+  padding: 10px 24px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.btn-primary:hover {
+  background: var(--primary-strong);
+}
+
+.btn-primary:disabled {
+  background: #a5a3d3;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  padding: 10px 24px;
+  background: var(--surface-strong);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.btn-secondary:hover {
+  background: var(--surface);
+}
+
+.mensagem-sucesso {
+  color: #16a34a;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 12px;
+  background: #f0fdf4;
+  border-radius: 6px;
+  border: 1px solid #bbf7d0;
+}
+
+.mensagem-erro {
+  color: #dc2626;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 12px;
+  background: #fef2f2;
+  border-radius: 6px;
+  border: 1px solid #fecaca;
+}
+
+/* Busca */
+.busca-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 12px;
+  align-items: end;
+}
+
+.busca-grid label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.busca-grid input {
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 14px;
+  background: var(--surface);
+  color: var(--text);
+}
+
+.busca-grid input:focus {
+  outline: none;
+  border-color: var(--primary);
+  background: var(--surface);
+}
+
+.btn-limpar {
+  padding: 10px 20px;
+  background: var(--surface-strong);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.btn-limpar:hover {
+  background: var(--surface);
+}
+
+/* Tabela */
+.tabela-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.tabela-header h2 {
+  margin: 0;
+  border: none;
+  padding: 0;
+}
+
+.total-badge {
+  background: var(--surface-strong);
+  color: var(--primary);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.tabela-wrapper {
+  overflow-x: auto;
+}
+
+.tabela {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+/* Alinha verticalmente e define largura fixa para a coluna Telefone */
+.tabela td {
+  vertical-align: middle;
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
+}
+
+.tabela th:nth-child(4),
+.tabela td:nth-child(4) {
+  width: 160px;
+  min-width: 120px;
+}
+
+/* Ensure inputs in forms align properly */
+.form-grid label {
+  width: 100%;
+}
+
+.tabela th {
+  background: var(--surface-strong);
+  padding: 12px 16px;
+  text-align: left;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 2px solid var(--border-soft);
+}
+
+.tabela td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border-soft);
+  font-size: 14px;
+  color: var(--text);
+}
+
+.tabela tr:hover td {
+  background: var(--surface-soft);
+}
+
+.tabela tr:last-child td {
+  border-bottom: none;
+}
+
+.lista-vazia {
+  text-align: center;
+  padding: 48px 0;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.btn-editar {
+  padding: 6px 14px;
+  background: #fef3c7;
+  color: #92400e;
+  border: 1px solid #fde68a;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  margin-right: 8px;
+  transition: background 0.2s;
+}
+
+.btn-editar:hover {
+  background: #fde68a;
+}
+
+.btn-deletar {
+  padding: 6px 14px;
+  background: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.btn-deletar:hover {
+  background: #fecaca;
+}
+
+@media (max-width: 768px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .busca-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pessoas-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+}
