@@ -9,7 +9,8 @@ RUN apt-get update && apt-get install -y python3 make g++ --no-install-recommend
 
 # Copiar manifestos e instalar dependências compilando módulos nativos no build
 COPY package*.json ./
-RUN npm ci --build-from-source
+# Use `npm install` to avoid failing when package-lock.json is out of sync in the build context
+RUN npm install --build-from-source
 
 # Copiar o restante do código e construir
 COPY . .
