@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
     "build": "tsc && cp src/database/schema.sql dist/database/schema.sql",
-    "start": "node dist/server.js"
+    "start": "node dist/server.js",
+    "postinstall": "npm rebuild better-sqlite3 sqlite3 --build-from-source"
   },
   "keywords": [],
   "author": "",
@@ -14,15 +15,15 @@
   "type": "commonjs",
   "dependencies": {
     "bcrypt": "^5.1.1",
+    "better-sqlite3": "^12.10.0",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
-    "jsonwebtoken": "^9.0.0",
-    "sqlite": "^5.1.1",
-    "sqlite3": "6.0.1"
+    "jsonwebtoken": "^9.0.0"
   },
   "devDependencies": {
     "@types/bcrypt": "^6.0.0",
+    "@types/better-sqlite3": "^7.6.13",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
     "@types/jsonwebtoken": "^9.0.2",
@@ -31,6 +32,6 @@
     "typescript": "^6.0.3"
   },
   "engines": {
-  "node": "20.x"
+    "node": "20.x"
   }
 }
