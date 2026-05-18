@@ -9,6 +9,7 @@ type UserFormState = {
   email: string;
   senha: string;
   role: Role;
+  ativo: boolean;
 };
 
 export function UsersPage() {
@@ -22,6 +23,7 @@ export function UsersPage() {
     email: "",
     senha: "",
     role: "rh",
+    ativo: true,
   });
   const canEditAccess = user?.role === "admin";
   const canCreateAccess = user?.role === "admin";
@@ -52,6 +54,7 @@ export function UsersPage() {
           nome: formState.nome,
           email: formState.email,
           role: formState.role,
+          ativo: formState.ativo,
         };
 
         if (formState.senha.trim()) {
@@ -64,7 +67,7 @@ export function UsersPage() {
         await createUser(formState);
       }
 
-      setFormState({ nome: "", email: "", senha: "", role: "rh" });
+      setFormState({ nome: "", email: "", senha: "", role: "rh", ativo: true });
       await loadUsers();
     } catch (err: any) {
       setError(err.message);
@@ -73,12 +76,12 @@ export function UsersPage() {
 
   function handleEdit(user: User) {
     setEditingUser(user);
-    setFormState({ nome: user.nome, email: user.email, senha: "", role: user.role });
+    setFormState({ nome: user.nome, email: user.email, senha: "", role: user.role, ativo: user.ativo });
   }
 
   function handleCancelEdit() {
     setEditingUser(null);
-    setFormState({ nome: "", email: "", senha: "", role: "rh" });
+    setFormState({ nome: "", email: "", senha: "", role: "rh", ativo: true });
   }
 
   async function handleRemove(id: number) {
@@ -110,6 +113,7 @@ export function UsersPage() {
                 <th>Nome</th>
                 <th>Email</th>
                 <th>Permissão</th>
+                <th>Ativo</th>
                 <th>Último login</th>
                 <th>Ações</th>
               </tr>
@@ -120,6 +124,7 @@ export function UsersPage() {
                   <td>{access.nome}</td>
                   <td>{access.email}</td>
                   <td>{access.role}</td>
+                  <td>{access.ativo ? "Sim" : "Não"}</td>
                   <td>{access.last_login ?? "Nunca"}</td>
                   <td>
                     {canEditAccess && (
@@ -184,6 +189,16 @@ export function UsersPage() {
               ) : (
                 <input value={formState.role} readOnly />
               )}
+            </label>
+            <label>
+              Ativo
+              <select
+                value={formState.ativo ? "sim" : "nao"}
+                onChange={(event) => setFormState({ ...formState, ativo: event.target.value === "sim" })}
+              >
+                <option value="sim">Sim</option>
+                <option value="nao">Não</option>
+              </select>
             </label>
             <div className="form-acoes">
               <button type="submit" className="btn-primary">

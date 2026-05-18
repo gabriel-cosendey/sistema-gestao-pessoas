@@ -47,9 +47,23 @@ async function initializeDatabase() {
   const schema = fs.readFileSync(schemaPath, "utf-8");
 
   queryDb.exec(schema);
+  await ensureActiveColumn();
   await ensureAdminUser();
 
   console.log("Banco de dados inicializado com sucesso");
+}
+
+async function ensureActiveColumn() {
+  if (!db) throw new Error("Banco de dados não inicializado");
+
+  const columns = db
+    .prepare("PRAGMA table_info(usuarios)")
+    .all()
+    .map((row: any) => row.name);
+
+  if (!columns.includes("ativo")) {
+    db.exec("ALTER TABLE usuarios ADD COLUMN ativo INTEGER NOT NULL DEFAULT 1");
+  }
 }
 
 async function ensureAdminUser() {

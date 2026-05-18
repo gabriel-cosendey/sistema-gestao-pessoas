@@ -1,35 +1,58 @@
 import { getDatabase } from "../database/connection";
 import { CreateUserData, UpdateUserData, User } from "../types/user";
 
+type DbUser = Omit<User, "ativo"> & { ativo: number };
+
+function normalizeUser(user: DbUser | undefined): User | undefined {
+  if (!user) return undefined;
+  return {
+    ...user,
+    ativo: Boolean(user.ativo),
+  };
+}
+
 async function create(data: CreateUserData, hashedPassword: string) {
   const db = getDatabase();
 
   const result = await db.run(
-    `INSERT INTO usuarios (nome, email, senha, role) VALUES (?, ?, ?, ?)`,
+    `INSERT INTO usuarios (nome, email, senha, role, ativo) VALUES (?, ?, ?, ?, ?)`,
     data.nome,
     data.email,
     hashedPassword,
-    data.role
+    data.role,
+    data.ativo === false ? 0 : 1
   );
 
-  return db.get<User>("SELECT id, nome, email, role, last_login, created_at, updated_at FROM usuarios WHERE id = ?", result.lastInsertRowid);
+  return normalizeUser(
+    db.get<DbUser>(
+      "SELECT id, nome, email, role, ativo, last_login, created_at, updated_at FROM usuarios WHERE id = ?",
+      result.lastInsertRowid
+    )
+  );
 }
 
 async function findAll() {
   const db = getDatabase();
-  return db.all<Pick<User, "id" | "nome" | "email" | "role" | "last_login" | "created_at" | "updated_at">[]>(
-    "SELECT id, nome, email, role, last_login, created_at, updated_at FROM usuarios ORDER BY nome ASC"
-  );
+  return db.all<DbUser>(
+    "SELECT id, nome, email, role, ativo, last_login, created_at, updated_at FROM usuarios ORDER BY nome ASC"
+  ).map(normalizeUser) as User[];
 }
 
 async function findById(id: number) {
   const db = getDatabase();
-  return db.get<User>("SELECT id, nome, email, role, last_login, created_at, updated_at FROM usuarios WHERE id = ?", id);
+  return normalizeUser(
+    db.get<DbUser>(
+      "SELECT id, nome, email, role, ativo, last_login, created_at, updated_at FROM usuarios WHERE id = ?",
+      id
+    )
+  );
 }
+
+type DbUserWithPassword = DbUser & { senha: string };
 
 async function findByEmail(email: string) {
   const db = getDatabase();
-  return db.get<User & { senha: string }>("SELECT * FROM usuarios WHERE email = ?", email);
+  return db.get<DbUserWithPassword>("SELECT * FROM usuarios WHERE email = ?", email);
 }
 
 async function update(id: number, data: UpdateUserData, hashedPassword?: string) {
@@ -41,9 +64,17 @@ async function update(id: number, data: UpdateUserData, hashedPassword?: string)
       email = COALESCE(?, email),
       senha = COALESCE(?, senha),
       role = COALESCE(?, role),
+      ativo = COALESCE(?, ativo),
       updated_at = CURRENT_TIMESTAMP
      WHERE id = ?`,
-    [data.nome, data.email, hashedPassword ?? null, data.role, id]
+    [
+      data.nome,
+      data.email,
+      hashedPassword ?? null,
+      data.role,
+      data.ativo === undefined ? null : data.ativo ? 1 : 0,
+      id,
+    ]
   );
 
   return findById(id);

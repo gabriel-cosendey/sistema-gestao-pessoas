@@ -5,6 +5,7 @@ export type User = {
   nome: string;
   email: string;
   role: Role;
+  ativo: boolean;
   last_login?: string;
   created_at: string;
   updated_at: string;
@@ -15,6 +16,7 @@ export type CreateUserData = {
   email: string;
   senha: string;
   role: Role;
+  ativo?: boolean;
 };
 
 export type UpdateUserData = {
@@ -22,4 +24,5 @@ export type UpdateUserData = {
   email?: string;
   senha?: string;
   role?: Role;
+  ativo?: boolean;
 };
