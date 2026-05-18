@@ -18,8 +18,10 @@ function prepareParams(params?: any[]) {
 }
 
 async function initializeDatabase() {
-  const databaseFile = process.env.DATABASE_FILE || "./src/database/database.sqlite";
+  const databaseFile =
+    process.env.DATABASE_FILE || path.join(__dirname, "database.sqlite");
 
+  fs.mkdirSync(path.dirname(databaseFile), { recursive: true });
   db = new BetterSqlite3(databaseFile);
 
   queryDb = {
