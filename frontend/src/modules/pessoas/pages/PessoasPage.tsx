@@ -45,7 +45,11 @@ export function PessoasPage() {
     setPessoaEditando(null);
     carregarPessoas(buscaNome, buscaCargo);
   }
-
+  async function handlePessoaCriada() {
+    setBuscaNome("");
+    setBuscaCargo("");
+    await carregarPessoas();
+  }
   function handleCancelar() {
     setPessoaEditando(null);
   }
@@ -74,7 +78,7 @@ export function PessoasPage() {
                 onCancelar={handleCancelar}
               />
             ) : canManagePessoas ? (
-              <PessoaForm onPessoaCriada={() => carregarPessoas(buscaNome, buscaCargo)} />
+              <PessoaForm onPessoaCriada={handlePessoaCriada} />
             ) : (
               <div className="mensagem-aviso">
                 Você não tem permissão para cadastrar ou editar pessoas. Somente RH e Admin podem fazer isso.
