@@ -6,10 +6,13 @@ async function create(data: CreateUserData, hashedPassword: string) {
 
   const result = await db.run(
     `INSERT INTO usuarios (nome, email, senha, role) VALUES (?, ?, ?, ?)`,
-    [data.nome, data.email, hashedPassword, data.role]
+    data.nome,
+    data.email,
+    hashedPassword,
+    data.role
   );
 
-  return db.get<User>("SELECT id, nome, email, role, last_login, created_at, updated_at FROM usuarios WHERE id = ?", result.lastID);
+  return db.get<User>("SELECT id, nome, email, role, last_login, created_at, updated_at FROM usuarios WHERE id = ?", result.lastInsertRowid);
 }
 
 async function findAll() {

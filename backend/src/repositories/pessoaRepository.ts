@@ -7,10 +7,15 @@ async function create(data: CreatePessoaData) {
   const result = await db.run(
     `INSERT INTO pessoas (nome, cpf, email, telefone, cargo, data_nascimento)
      VALUES (?, ?, ?, ?, ?, ?)`,
-    [data.nome, data.cpf, data.email, data.telefone ?? "", data.cargo ?? "", data.data_nascimento ?? ""]
+    data.nome,
+    data.cpf,
+    data.email,
+    data.telefone ?? "",
+    data.cargo ?? "",
+    data.data_nascimento ?? ""
   );
 
-  return db.get("SELECT * FROM pessoas WHERE id = ?", result.lastID);
+  return db.get("SELECT * FROM pessoas WHERE id = ?", result.lastInsertRowid);
 }
 
 async function findAll(nome?: string, cargo?: string) {

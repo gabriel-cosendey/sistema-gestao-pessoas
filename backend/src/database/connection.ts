@@ -1,19 +1,50 @@
 import fs from "fs";
 import path from "path";
-import Database from "better-sqlite3";
+import BetterSqlite3 from "better-sqlite3";
 import bcrypt from "bcrypt";
 
-let db: Database.Database | null = null;
+type QueryDatabase = {
+  exec: (sql: string) => void;
+  run: (sql: string, ...params: any[]) => BetterSqlite3.RunResult;
+  get: <T = any>(sql: string, ...params: any[]) => T | undefined;
+  all: <T = any>(sql: string, ...params: any[]) => T[];
+};
+
+let db: BetterSqlite3.Database | null = null;
+let queryDb: QueryDatabase | null = null;
+
+function prepareParams(params?: any[]) {
+  return params ?? [];
+}
 
 async function initializeDatabase() {
   const databaseFile = process.env.DATABASE_FILE || "./src/database/database.sqlite";
 
-  db = new Database(databaseFile);
+  db = new BetterSqlite3(databaseFile);
+
+  queryDb = {
+    exec: (sql) => {
+      if (!db) throw new Error("Banco de dados não inicializado");
+      db.exec(sql);
+    },
+    run: (sql, ...params) => {
+      if (!db) throw new Error("Banco de dados não inicializado");
+      return db.prepare(sql).run(...params);
+    },
+    get: <T = any>(sql: string, ...params: any[]) => {
+      if (!db) throw new Error("Banco de dados não inicializado");
+      return db.prepare(sql).get(...params) as T | undefined;
+    },
+    all: <T = any>(sql: string, ...params: any[]) => {
+      if (!db) throw new Error("Banco de dados não inicializado");
+      return db.prepare(sql).all(...params) as T[];
+    },
+  };
 
   const schemaPath = path.resolve(__dirname, "schema.sql");
   const schema = fs.readFileSync(schemaPath, "utf-8");
 
-  db.exec(schema);
+  queryDb.exec(schema);
   await ensureAdminUser();
 
   console.log("Banco de dados inicializado com sucesso");
@@ -36,10 +67,10 @@ async function ensureAdminUser() {
 }
 
 function getDatabase() {
-  if (!db) {
+  if (!queryDb) {
     throw new Error("Banco de dados não inicializado");
   }
-  return db;
+  return queryDb;
 }
 
 export { initializeDatabase, getDatabase };
