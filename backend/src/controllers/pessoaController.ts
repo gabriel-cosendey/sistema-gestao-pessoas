@@ -16,9 +16,7 @@ async function create(req: Request, res: Response) {
 async function getAll(req: AuthRequest, res: Response) {
   try {
     const { nome, cargo } = req.query;
-    // if requester is RH, only show pessoas with cargo 'rh'
-    const requesterRole = req.user?.role;
-    const effectiveCargo = requesterRole === "rh" ? "rh" : (cargo as string | undefined);
+    const effectiveCargo = cargo as string | undefined;
     const pessoas = await pessoaService.getAllPessoas(nome as string | undefined, effectiveCargo);
     return res.status(200).json(pessoas);
   } catch (error: any) {
