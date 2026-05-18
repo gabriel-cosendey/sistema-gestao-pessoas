@@ -3,8 +3,8 @@ import { useAuth } from "../auth/authContext";
 
 export function ProfilePage() {
   const { user } = useAuth();
-  const [name, setName] = useState(user?.nome ?? "");
-  const [email, setEmail] = useState(user?.email ?? "");
+  const [name] = useState(user?.nome ?? "");
+  const [email] = useState(user?.email ?? "");
 
   return (
     <div className="page-card">

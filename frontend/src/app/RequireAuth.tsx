@@ -1,9 +1,10 @@
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../modules/auth/authContext";
+import type { ReactNode } from "react";
 import type { Role } from "../types/user";
 
 type RequireAuthProps = {
-  children: JSX.Element;
+  children: ReactNode;
   roles?: Role[];
 };
 

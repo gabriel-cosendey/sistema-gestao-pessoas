@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import type { FormEvent } from "react";
 import { createUser, getUsers, removeUser, updateUser } from "../services/userApi";
 import { useAuth } from "../../auth/authContext";
-import type { CreateUserData, UpdateUserData, User, Role } from "../../../types/user";
+import type { UpdateUserData, User, Role } from "../../../types/user";
 
 type UserFormState = {
   nome: string;
