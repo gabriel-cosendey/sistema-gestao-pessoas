@@ -1,4 +1,4 @@
-const API_URL = import.meta.env.VITE_API_URL ?? "http://localhost:3333";
+const API_URL = import.meta.env.VITE_API_URL ?? "https://sistema-gestao-pessoas-1.onrender.com";
 
 function getAuthToken() {
   return localStorage.getItem("authToken");
